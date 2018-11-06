@@ -1,0 +1,13 @@
+Bootstrap: docker 
+From: tensorflow/tensorflow:1.11.0-gpu-py3
+
+%post
+    mkdir -p /global/home/users
+    mkdir -p /global/scratch
+    touch /bin/nvidia-smi
+
+%runscript
+    python "$@"
+
+%startscript
+    jupyter notebook --no-browser --ip=${SLURMD_NODENAME}
