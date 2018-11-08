@@ -4,6 +4,7 @@ From: tensorflow/tensorflow:1.11.0-gpu-py3
 %post
     mkdir -p /global/home/users
     mkdir -p /global/scratch
+    # /bin/nvidia-smi is a binary on the GPU nodes. Singularity with --nv seems to mount /bin/nvidia-smi and fails unless the file already exists in the container. 
     touch /bin/nvidia-smi
 
 %runscript
