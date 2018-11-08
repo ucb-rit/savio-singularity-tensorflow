@@ -10,4 +10,5 @@ From: tensorflow/tensorflow:1.11.0-gpu-py3
     python "$@"
 
 %startscript
-    jupyter notebook --no-browser --ip=${SLURMD_NODENAME}
+    # Not working because can't figure out how to write to a directory accessible to user and instance.start seems to execute without reference to the user
+    # if [ "${SLURM_JOB_ID}" != "" ]; then jupyter notebook --no-browser --ip=${SLURMD_NODENAME} 2>> slurm-${SLURM_JOB_ID}.out; else env && jupyter notebook --no-browser --ip="localhost" 2> jupyter-tf-gpu.out; fi
