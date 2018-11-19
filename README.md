@@ -3,7 +3,7 @@ Materials for creating Singularity container for running Tensorflow and Keras on
 
 ## To use the container on Savio
 
-You first need access to the container image file. If the image file has not been provided to you, you'll need to create it via the instructions below on building the container. You'll need root access to a Linux machine (one option here is an Amazon EC2 or Google Cloud Platform virtual machine instance) in order to build the container.
+You first need access to the container image file. If the image file has not been provided to you, you'll need to create it via the instructions below on building the container. You'll need root access to a Linux machine (one option here is an Amazon EC2 or Google Cloud Platform virtual machine instance; another option is running within a Docker container) in which you've installed Singularity in order to build the container.
 
 ### Using the container via command-line Python
 
