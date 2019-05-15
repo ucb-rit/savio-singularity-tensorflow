@@ -41,13 +41,44 @@ Now follow [these instructions](https://research-it.berkeley.edu/services/high-p
 
 Paste the URL you obtained earlier into the browser and you're ready to compute after you start a Python 3 notebook.
 
- When you are done with your Jupyter notebook, make sure to kill your `srun` or `sbatch` session so you are not charged for time you don't need. 
+ When you are done with your Jupyter notebook, make sure to kill your `srun` or `sbatch` session so you are not charged for time you don't need.
+
+### Adding Python packages to your container
+
+While one could add additional Python packages to the container itself, the easiest thing to do as a user is to install additional packages outside the container, which is easy to do because Singularity automatically gives you access to files on the host system.
+
+One possibility is to use `pip install --user packageName` inside the container. That will install into the `.local` subdirectory of your home directory on the host system. This might be fine but runs the risk of conflicting with Python packages that you've installed for use on the host system.
+
+Here's an alternative that isolates the additional (statsmodels and scipy and their dependencies in this case) in a directory:
+
+```
+export SING_PY_DIRS=~/singularity_tf_pylibs
+mkdir ${SING_PY_DIRS}
+SINGULARITYENV_PYTHONPATH=${SING_PY_DIRS} singularity exec --nv tf-gpu-savio.simg pip install -t ${SING_PY_DIRS} statsmodels scipy
+```
+
+Now when you want to run Python inside the container, make sure to set `SINGULARITYENV_PYTHONPATH` (which sets `PYTHONPATH` inside the container, such that Python knows where to find the packages you've just installed), for example:
+
+```
+SINGULARITYENV_PYTHONPATH=${PYTHONPATH} singularity run --nv tf-gpu-savio.simg
+```
+
 
 ## To build the container
 
+You'll need access to a machine where you have administrative privileges (i.e., 'root' access). 
+
 ```
-sudo singularity build tf-gpu-savio.simg tf_gpu_0.1.def
+sudo singularity build tf-gpu-savio.simg tf_gpu_0.2.def
 ```
+
+Alternatively (i.e., without any special privileges), if you're using a newer version of Singularity, you may be able to build the container via Sylabs Cloud Remote Builder, like this:
+
+```
+singularity build --remote tf-gpu-savio.sif tf_gpu_0.2.def
+```
+
+You'll need to create an account with Sylabs Cloud. More details are [here](https://www.sylabs.io/guides/3.1/user-guide/singularity_and_docker.html#building-containers-remotely).
 
 Notes:
 
