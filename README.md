@@ -1,5 +1,5 @@
 # savio-singularity-tensorflow
-Materials for creating Singularity container for running Tensorflow and Keras on Savio either in the Python interpreter or in a Jupyter notebook.
+Materials for creating a Singularity container for running Tensorflow and Keras on Savio either in the Python interpreter or in a Jupyter notebook.
 
 ## To use the container on Savio
 
@@ -54,7 +54,8 @@ Here's an alternative that isolates the additional (statsmodels and scipy and th
 ```
 export SING_PY_DIRS=~/singularity_tf_pylibs
 mkdir ${SING_PY_DIRS}
-SINGULARITYENV_PYTHONPATH=${SING_PY_DIRS} singularity exec --nv tf-gpu-savio.simg pip install -t ${SING_PY_DIRS} statsmodels scipy
+SINGULARITYENV_PYTHONPATH=${SING_PY_DIRS} singularity exec --nv \
+   tf-gpu-savio.simg pip install -t ${SING_PY_DIRS} statsmodels scipy
 ```
 
 Now when you want to run Python inside the container, make sure to set `SINGULARITYENV_PYTHONPATH` (which sets `PYTHONPATH` inside the container, such that Python knows where to find the packages you've just installed), for example:
@@ -80,7 +81,7 @@ singularity build --remote tf-gpu-savio.sif tf_gpu_0.2.def
 
 You'll need to create an account with Sylabs Cloud. More details are [here](https://www.sylabs.io/guides/3.1/user-guide/singularity_and_docker.html#building-containers-remotely).
 
-Notes:
+## Notes
 
 These instructions should work for both savio2_gpu and savio2_1080ti nodes. Note that building the container off of *nvcr.io/nvidia/tensorflow:18.02-py3* as done in [https://github.comb/ucberkeley/brc-cyberinfrastructure] in the *deep-learning-singularity* directory will only work on savio2_1080ti.
 
