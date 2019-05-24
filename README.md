@@ -10,13 +10,13 @@ You first need access to the container image file. If the image file has not bee
 To start an interactive Python session with access to Tensorflow and Keras, start an srun session and invoke the following in the shell on the compute node:
 
 ```
-singularity run --nv tf-gpu-savio.simg 
+singularity run --nv tf-gpu.simg 
 ```
 
 To execute the code in a Python script (here `check-tensorflow.py`), either in an srun session or via sbatch, invoke:
 
 ```
-singularity run --nv tf-gpu-savio.simg check-tensorflow.py
+singularity run --nv tf-gpu.simg check-tensorflow.py
 ```
 
 ### Using the container via a Jupyter notebook
@@ -24,7 +24,7 @@ singularity run --nv tf-gpu-savio.simg check-tensorflow.py
 Start an srun session and invoke the following in the shell (or include the following in your sbatch job script):
 
 ```
-singularity exec --nv tf-gpu-savio.simg jupyter notebook --no-browser --ip=${SLURMD_NODENAME}
+singularity exec --nv tf-gpu.simg jupyter notebook --no-browser --ip=${SLURMD_NODENAME}
 ```
 
 Either in the interactive session terminal output or in the SLURM .out file for the running sbatch job, you should see a note about the URL that will allow you to connect to the Jupyter session:
@@ -55,13 +55,13 @@ Here's an alternative that isolates the additional (statsmodels and scipy and th
 export SING_PY_DIRS=~/singularity_tf_pylibs
 mkdir ${SING_PY_DIRS}
 SINGULARITYENV_PYTHONPATH=${SING_PY_DIRS} singularity exec --nv \
-   tf-gpu-savio.simg pip install -t ${SING_PY_DIRS} statsmodels scipy
+   tf-gpu.simg pip install -t ${SING_PY_DIRS} statsmodels scipy
 ```
 
 Now when you want to run Python inside the container, make sure to set `SINGULARITYENV_PYTHONPATH` (which sets `PYTHONPATH` inside the container, such that Python knows where to find the packages you've just installed), for example:
 
 ```
-SINGULARITYENV_PYTHONPATH=${PYTHONPATH} singularity run --nv tf-gpu-savio.simg
+SINGULARITYENV_PYTHONPATH=${PYTHONPATH} singularity run --nv tf-gpu.simg
 ```
 
 
@@ -70,13 +70,13 @@ SINGULARITYENV_PYTHONPATH=${PYTHONPATH} singularity run --nv tf-gpu-savio.simg
 You'll need access to a machine where you have administrative privileges (i.e., 'root' access). 
 
 ```
-sudo singularity build tf-gpu-savio.simg tf_gpu_0.2.def
+sudo singularity build tf-gpu.simg tf-gpu-0.3.def
 ```
 
 Alternatively (i.e., without any special privileges), if you're using a newer version of Singularity, you may be able to build the container via Sylabs Cloud Remote Builder, like this:
 
 ```
-singularity build --remote tf-gpu-savio.sif tf_gpu_0.2.def
+singularity build --remote tf-gpu.sif tf-gpu-0.3.def
 ```
 
 You'll need to create an account with Sylabs Cloud. More details are [here](https://www.sylabs.io/guides/3.1/user-guide/singularity_and_docker.html#building-containers-remotely).
