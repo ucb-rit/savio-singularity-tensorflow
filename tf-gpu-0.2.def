@@ -11,7 +11,7 @@ From: tensorflow/tensorflow:1.13.1-gpu-py3
     mkdir -p /global/scratch
     # /bin/nvidia-smi is a binary on the GPU nodes. Singularity with --nv seems to mount /bin/nvidia-smi and fails unless the file already exists in the container. 
     touch /bin/nvidia-smi
-    # avoid warnings about non existent bind points
+    # avoid warnings about non existent bind points; this shouldn't be needed as of v3.0 of singularity, according to https://github.com/sylabs/singularity/issues/1182
     touch /usr/bin/nvidia-smi
     touch /usr/bin/nvidia-debugdump
     touch /usr/bin/nvidia-persistenced
