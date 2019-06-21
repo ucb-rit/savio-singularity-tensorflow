@@ -83,7 +83,7 @@ You'll need to create an account with Sylabs Cloud. More details are [here](http
 
 ## Notes
 
-These instructions should work for both savio2_gpu and savio2_1080ti nodes. Note that building the container off of *nvcr.io/nvidia/tensorflow:18.02-py3* as done in [https://github.comb/ucberkeley/brc-cyberinfrastructure] in the *deep-learning-singularity* directory will only work on savio2_1080ti.
+These instructions should work for both savio2_gpu and savio2_1080ti nodes. Note that building the container off of *nvcr.io/nvidia/tensorflow:18.02-py3* as done in [https://github.com/ucberkeley/brc-cyberinfrastructure] in the *deep-learning-singularity* directory will only work on savio2_1080ti.
 
 Also, I tried to get the container to start Jupyterhub via instance.start but couldn't figure out how to write out the Jupyter URL to a file accessible to the user, nor to print to the screen.
 
