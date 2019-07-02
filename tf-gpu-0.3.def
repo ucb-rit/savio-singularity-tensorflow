@@ -1,5 +1,5 @@
 Bootstrap: docker 
-From: tensorflow/tensorflow:1.12.3-gpu-py3
+From: tensorflow/tensorflow:1.11.0-gpu-py3
 
 %environment
     # avoid warning about inability to change locale
@@ -17,8 +17,6 @@ From: tensorflow/tensorflow:1.12.3-gpu-py3
     touch /usr/bin/nvidia-persistenced
     touch /usr/bin/nvidia-cuda-mps-control
     touch /usr/bin/nvidia-cuda-mps-server
-    mkdir /opt2
-    chmod guo+rwx /opt2
 
 %runscript
     python "$@"

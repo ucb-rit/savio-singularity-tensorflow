@@ -83,7 +83,9 @@ You'll need to create an account with Sylabs Cloud. More details are [here](http
 
 ## Notes
 
-It won't work to build a container using Tensorflow version 1.13 or higher as they need later versions of the NVIDIA drivers than are available on Savio as of June 2019. 
+This should work for Tensorflow versions up through 1.11.0.
+
+It won't work to build a container using Tensorflow version 1.13 or higher as they need later versions of the NVIDIA drivers than are available on Savio as of June 2019. And for some reason, using Tensorflow version 1.12.3 results in one not being able to access the GPU using Tensorflow.
 
 These instructions should work for both savio2_gpu and savio2_1080ti nodes. Note that building the container off of *nvcr.io/nvidia/tensorflow:18.02-py3* as done in [https://github.com/ucberkeley/brc-cyberinfrastructure] in the *deep-learning-singularity* directory will only work on savio2_1080ti.
 
