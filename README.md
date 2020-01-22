@@ -16,7 +16,8 @@ singularity run --nv tf-gpu.simg
 To execute the code in a Python script (here `check-tensorflow.py`), either in an srun session or via sbatch, invoke:
 
 ```
-singularity run --nv tf-gpu.simg check-tensorflow.py
+singularity run --nv tf-gpu.simg check-tensorflow.py  # for Tensorflow < 2.0.0
+singularity run --nv tf-gpu.simg check-tensorflow-tf2.py  # for Tensorflow >= 2.0.0
 ```
 
 ### Using the container via a Jupyter notebook
@@ -83,9 +84,7 @@ You'll need to create an account with Sylabs Cloud. More details are [here](http
 
 ## Notes
 
-This should work for Tensorflow versions up through 1.11.0.
-
-It won't work to build a container using Tensorflow version 1.13 or higher as they need later versions of the NVIDIA drivers than are available on Savio as of June 2019. And for some reason, using Tensorflow version 1.12.3 results in one not being able to access the GPU using Tensorflow.
+This should work for Tensorflow versions up through 2.1.0 and may work for later versions, provided the CUDA version that a given Tensorflow version needs can use the current NVIDIA driver on Savio (440.44 as of January 2020).
 
 These instructions should work for both savio2_gpu and savio2_1080ti nodes. Note that building the container off of *nvcr.io/nvidia/tensorflow:18.02-py3* as done in [https://github.com/ucberkeley/brc-cyberinfrastructure] in the *deep-learning-singularity* directory will only work on savio2_1080ti.
 
