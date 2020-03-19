@@ -3,9 +3,21 @@ Materials for creating a Singularity container for running Tensorflow and Keras 
 
 ## To use the container on Savio
 
-You first need access to the container image file. If the image file has not been provided to you, you'll need to create it via the instructions below on building the container. You'll need root access to a Linux machine (one option here is an Amazon EC2 or Google Cloud Platform virtual machine instance; another option is running within a Docker container) in which you've installed Singularity in order to build the container.
+You first need access to the container image file. 
+
+To use image files that we've prepared (currently for Tensorflow 1.11.0 and 1.15.2), load the relevant module, e.g.,
+
+```
+module load tensorflow-gpu-singularity/1.15.2
+```
+
+This will give you the path to and name of the .simg image file that you'll use below.
+
+If the image file has not been provided to you, you'll need to create it via the instructions below on building the container. You'll need root access to a Linux machine (one option here is an Amazon EC2 or Google Cloud Platform virtual machine instance; another option is running within a Docker container) in which you've installed Singularity in order to build the container.
 
 ### Using the container via command-line Python
+
+We'll assume the image file is named `tf-gpu.simg`.
 
 To start an interactive Python session with access to Tensorflow and Keras, start an srun session and invoke the following in the shell on the compute node:
 
@@ -71,13 +83,13 @@ SINGULARITYENV_PYTHONPATH=${PYTHONPATH} singularity run --nv tf-gpu.simg
 You'll need access to a machine where you have administrative privileges (i.e., 'root' access). 
 
 ```
-sudo singularity build tf-gpu.simg tf-gpu-0.3.def
+sudo singularity build tf-gpu.simg tf-gpu-1.15.2.def
 ```
 
 Alternatively (i.e., without any special privileges), if you're using a newer version of Singularity, you may be able to build the container via Sylabs Cloud Remote Builder, like this:
 
 ```
-singularity build --remote tf-gpu.sif tf-gpu-0.3.def
+singularity build --remote tf-gpu.sif tf-gpu-1.15.2.def
 ```
 
 You'll need to create an account with Sylabs Cloud. More details are [here](https://www.sylabs.io/guides/3.1/user-guide/singularity_and_docker.html#building-containers-remotely).
