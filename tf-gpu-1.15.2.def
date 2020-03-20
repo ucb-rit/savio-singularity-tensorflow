@@ -7,6 +7,8 @@ From: tensorflow/tensorflow:1.15.2-gpu
     export LC_ALL
 
 %post
+    # to silence warning: "underlay of /etc/localtime required more than 50 (85) bind mounts"
+    mkdir /etc/localtime
     # mkdir -p /global/home/users
     # mkdir -p /global/scratch
     # /bin/nvidia-smi is a binary on the GPU nodes. Singularity with --nv seems to mount /bin/nvidia-smi and fails unless the file already exists in the container. 
