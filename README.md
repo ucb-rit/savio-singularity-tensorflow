@@ -1,6 +1,8 @@
 # savio-singularity-tensorflow
 Materials for creating a Singularity container for running Tensorflow and Keras on Savio either in the Python interpreter or in a Jupyter notebook.
 
+NOTE: As of Singularity version 3.0, we don't expect it to be necessary to create user or scratch directories in the container, nor to create dummy `/bin/nvidia-smi` or `/usr/bin/nvidia-*` files. Thus these steps can probably be omitted from the `%post` steps in the various Singularity definition files in this repository.
+
 ## To use the container on Savio
 
 You first need access to the container image file. 
